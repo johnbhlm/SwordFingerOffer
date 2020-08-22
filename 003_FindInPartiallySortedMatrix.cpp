@@ -3,7 +3,7 @@
 
 using namespace std;
 
-//1.������
+//1.暴力法
 //class Solution {
 //public:
 //	bool Find(int target, vector<vector<int> > array) {
@@ -13,7 +13,7 @@ using namespace std;
 //		for (int i = 0; i < array.size(); ++i) {
 //			for (int j = 0; j < array[i].size(); ++j) {
 //				if (false == isFound && target == array[i][j]) {
-//					//�Ѿ��ҵ����û��Ҫ������
+//					//已经找到后就没必要再找了
 //					isFound = true;
 //					return isFound;
 //				}
@@ -30,16 +30,17 @@ using namespace std;
 //		int rows = array.size();
 //		int cols = array[0].size();
 //
+//		// 从右上角的元素找起,如果查找的元素比当前位置元素小, 就向左走; 如果查找的元素比当前位置元素大, 就向下走
 //		for (int i = 0, j = cols - 1; (i >= 0 && i < rows) && (j >= 0 && j < cols);) {
 //			if (target == array[i][j]) {
 //				isFound = true;
 //				break;
 //			}
-//			else if(array[i][j] > target){//target�ڵ�ǰλ�õ����
+//			else if(array[i][j] > target){//target在当前位置的左侧
 //				j--;
 //				
 //			}
-//			else {//target�ڵ�ǰλ�õ��·�
+//			else {//target在当前位置的下方
 //				i++;
 //			}
 //		}
@@ -54,15 +55,16 @@ public:
 		int rows = array.size();
 		int cols = array[0].size();
 
+		//从左下角的元素找起,如果查找的元素比当前位置元素小, 就向上走; 如果查找的元素比当前位置元素大, 就向右走
 		for (int i = rows - 1, j = 0; (i >= 0 && i < rows) && (j >= 0 && j < cols);) {
 			if (target == array[i][j]) {
 				isFound = true;
 				break;
 			}
-			else if (target < array[i][j]) { //target�ڵ�ǰλ�õ��Ϸ�
+			else if (target < array[i][j]) { //target在当前位置的上方
 				i--;
 			}
-			else{ //target�ڵ�ǰλ�õ��Ҳ�
+			else{ //target在当前位置的右侧
 				j++;
 			}			
 		}
